@@ -19,3 +19,31 @@ eureka:
 endpoints:
   restart:
     enabled: true
+
+# feign配置,这里不配置连接相关参数, 由ribbon来配置(因为更好)
+feign:
+  hystrix:
+    enabled: false
+  client:
+    config:
+      default:
+        loggerLevel: full
+
+ribbon:
+  MaxAutoRetries: 1
+  MaxAutoRetriesNextServer: 1
+  OkToRetryOnAllOperations: false # 注意这个最好配置为false,不然全部类型请求都重试
+  ServerListRefreshInterval: 2000
+  ConnectTimeout: 3000
+  ReadTimeout: 3000
+
+#hystrix的超时时间
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 9000
