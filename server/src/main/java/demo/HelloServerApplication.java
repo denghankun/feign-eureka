@@ -24,6 +24,11 @@ public class HelloServerApplication {
 
 	@RequestMapping("/")
 	public String hello() {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		List<ServiceInstance> instances = client.getInstances("HelloServer");
 		ServiceInstance selectedInstance = instances
 				.get(new Random().nextInt(instances.size()));
