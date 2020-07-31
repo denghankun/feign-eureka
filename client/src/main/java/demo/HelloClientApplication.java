@@ -10,6 +10,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
@@ -49,6 +50,9 @@ public class HelloClientApplication {
 	interface HelloClient {
 		@RequestMapping(value = "/", method = GET)
 		String hello();
+
+		@RequestMapping(name = "/sleep", method = GET)
+		void sleep();
 	}
 
 	@Component
@@ -58,5 +62,8 @@ public class HelloClientApplication {
 		public String hello() {
 			return "HELLO, FALLBACK";
 		}
+
+		@Override
+		public void sleep() {}
 	}
 }

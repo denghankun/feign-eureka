@@ -45,6 +45,23 @@
 			<groupId>org.springframework.retry</groupId>
 			<artifactId>spring-retry</artifactId>
 		</dependency>
+		<!-- httpclient -->
+		<!-- 参考:FeignAutoConfiguration可知,feign默认支持httpclient -->
+		<!-- 所以如果需要使用okhttp请屏蔽该依赖,或设置feign.httpclient.enabled=false -->
+		<!--
+		<dependency>
+			<groupId>io.github.openfeign</groupId>
+			<artifactId>feign-httpclient</artifactId>
+			<version>9.4.0</version>
+		</dependency>
+		-->
+		<!-- okhttp -->
+		<!-- 需要设置feign.okhttp.enabled=true启用 -->
+		<dependency>
+			<groupId>io.github.openfeign</groupId>
+			<artifactId>feign-okhttp</artifactId>
+			<version>10.2.0</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>

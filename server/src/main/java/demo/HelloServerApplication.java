@@ -10,6 +10,7 @@ import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -24,16 +25,20 @@ public class HelloServerApplication {
 
 	@RequestMapping("/")
 	public String hello() {
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 		List<ServiceInstance> instances = client.getInstances("HelloServer");
 		ServiceInstance selectedInstance = instances
 				.get(new Random().nextInt(instances.size()));
 		return "Hello World: " + selectedInstance.getServiceId() + ":" + selectedInstance
 				.getHost() + ":" + selectedInstance.getPort();
+	}
+
+	@RequestMapping(name = "/sleep", method = RequestMethod.GET)
+	public void sleep() {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void main(String[] args) {
